@@ -1,0 +1,1 @@
+adcLogeris_WPFFramework
