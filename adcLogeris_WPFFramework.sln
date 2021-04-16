@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "adcLogeris_WPFFramework", "adcLogeris_WPFFramework.csproj", "{60B008CA-724B-4E57-873B-D1A04261D9F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60B008CA-724B-4E57-873B-D1A04261D9F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60B008CA-724B-4E57-873B-D1A04261D9F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60B008CA-724B-4E57-873B-D1A04261D9F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60B008CA-724B-4E57-873B-D1A04261D9F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0C88B65-B3FC-4A37-AA3D-7334CE514BE9}
+	EndGlobalSection
+EndGlobal

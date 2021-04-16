@@ -1,0 +1,211 @@
+﻿<Window x:Class="adcLogeris_WPFFramework.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:adcLogeris_WPFFramework" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        Title="Data logger"
+        mc:Ignorable="d"
+        Closing="Window_Closing"
+        Height="707.833" Width="765.167">
+    <Grid>
+        <Button
+            Width="75"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            Click="IeskotiPortu_Click"
+            Content="Scan ports" Height="22" VerticalAlignment="Top" />
+
+        <ComboBox
+            x:Name="COMPort_ComboBox"
+            Width="120"
+            Margin="90,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Loaded="COMPort_ComboBox_Loaded"
+            SelectionChanged="COMPort_ComboBox_SelectionChanged" />
+        <Button
+            Width="120"
+            Height="22"
+            Margin="90,37,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Disconnect_Click"
+            Content="Disconnect" />
+        <Image
+            Width="61"
+            Height="61"
+            Margin="238,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Source="{Binding mStatusImage, UpdateSourceTrigger=PropertyChanged}" />
+        <GridSplitter Cursor="Arrow" Width="4" Height="61" Margin="305,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBox Text ="{Binding mFilePath}" TextWrapping="NoWrap" TextAlignment="Left" Margin="366,10,40,0" Height="22" VerticalAlignment="Top" IsReadOnly="True" KeyDown="LoseFocusOnEnter" />
+        <Label Content="Path:" HorizontalAlignment="Left" Margin="314,6,0,0" VerticalAlignment="Top" />
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="314,37,0,0" VerticalAlignment="Top" />
+        <TextBox Name = "failoVardas" Text ="{Binding Path = mFileName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Left" Height="22" Margin="366,41,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" KeyDown="LoseFocusOnEnter" IsReadOnly="{Binding mIrasineti}" />
+        <Button Content="..." HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="25" Click="ChooseFolder_Click" Height="22" />
+        <Button Content="Start" Margin="10,0,0,10" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75" Click="PradetiStabdytiIrasyma" />
+        <Label Name ="statusLabel" Content="Not recording" Margin="90,0,10,10" Height="30" VerticalAlignment="Bottom" />
+        <GridSplitter Cursor="Arrow" Height="4" Margin="10,76,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+        <Label Content="Period (300 - 60000)" HorizontalAlignment="Left" Margin="314,85,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+        <Button Content="Set" HorizontalAlignment="Left" Margin="424,116,0,0" VerticalAlignment="Top" Width="40" Height="22" Click="NustatymoMygtukas_click" />
+        <TextBox Name="periodoLaukas" HorizontalAlignment="Left" Height="22" Margin="314,116,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Text="1000" KeyDown="LoseFocusOnEnter" PreviewTextInput="NumberValidationTextBox" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+        <GridSplitter Cursor="Arrow" Height="4" Margin="10,0,10,45" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+        <GridSplitter Cursor="Arrow" Height="4" Margin="10,178,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+        <GridSplitter Cursor="Arrow" Width="4" Height="88" Margin="305,85,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TabControl Margin="10,187,10,54">
+            <TabItem Header="Main">
+                <Grid Background="#FFE5E5E5">
+                    <Grid Margin="84,79,83,98" HorizontalAlignment="Center" Width="564">
+                        <Label Content="ADC values (V):" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+                        <TextBox Text ="{Binding mKanalaiVertes[0]}" TextAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="10,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"  IsReadOnly="True" />
+                        <Label Content="1" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" />
+                        <TextBox Text ="{Binding mKanalaiVertes[1]}" TextAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="65,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+                        <Label Content="2" HorizontalAlignment="Left" Margin="65,36,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" />
+                        <TextBox Text ="{Binding mKanalaiVertes[2]}" TextAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="120,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+                        <Label Content="3" HorizontalAlignment="Left" Margin="120,36,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" />
+                        <TextBox Text ="{Binding mKanalaiVertes[3]}" TextAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="175,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+                        <Label Content="4" HorizontalAlignment="Left" Margin="175,36,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" />
+                        <TextBox Text ="{Binding mKanalaiVertes[4]}" TextAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="230,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+                        <Label Content="5" HorizontalAlignment="Left" Margin="230,36,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" />
+                        <TextBox Text ="{Binding mKanalaiVertes[5]}" TextAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="285,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+                        <Label Content="6" HorizontalAlignment="Left" Margin="285,36,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" />
+                        <TextBox Text ="{Binding mKanalaiVertes[6]}" TextAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="340,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+                        <Label Content="7" HorizontalAlignment="Left" Margin="340,36,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" />
+                        <TextBox Text ="{Binding mKanalaiVertes[7]}" TextAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="395,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+                        <Label Content="8" HorizontalAlignment="Left" Margin="395,36,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" />
+                        <TextBox Text ="{Binding mKanalaiVertes[8]}" TextAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="450,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+                        <Label Content="9" HorizontalAlignment="Left" Margin="450,36,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" />
+                        <TextBox Text ="{Binding mKanalaiVertes[9]}" TextAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="505,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+                        <Label Content="10" HorizontalAlignment="Left" Margin="505,36,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" />
+                        <Label Content="Temperature:" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" />
+                        <TextBox Text ="{Binding mKanalaiVertes[10]}" TextAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="118,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+                        <Label Content="Last distance:" HorizontalAlignment="Left" Margin="10,123,0,0" VerticalAlignment="Top" />
+                        <TextBox Text ="{Binding mLastDistance}" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="118,126,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="86" />
+                        <Label Content="Last amplitude:" HorizontalAlignment="Left" Margin="10,154,0,0" VerticalAlignment="Top" />
+                        <TextBox Text ="{Binding mLastAmplitude}" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="118,157,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="86" />
+                        <Label Content="mm" HorizontalAlignment="Left" Margin="209,123,0,0" VerticalAlignment="Top" />
+                        <Label Content="mm" HorizontalAlignment="Left" Margin="209,154,0,0" VerticalAlignment="Top" />
+                        <Label Content="&#186;C" HorizontalAlignment="Left" Margin="173,92,0,0" VerticalAlignment="Top" />
+                    </Grid>
+                    <TextBox x:Name = "lastWrittenLine" Margin="10,0,10,10" IsReadOnly="True" TextWrapping="NoWrap" Height="23" VerticalAlignment="Bottom" />
+                    <Label Content="Last written line" HorizontalAlignment="Left" Margin="10,0,0,38" Height="26" VerticalAlignment="Bottom" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Chamber">
+                <Grid Background="#FFE5E5E5">
+                    <Button
+                        Width="75"
+                        Margin="10,10,0,0"
+                        HorizontalAlignment="Left"
+                        Click="IeskotiPortu_Click_krosnis"
+                        Content="Scan ports" Height="22" VerticalAlignment="Top" />
+                    <ComboBox
+                        x:Name="COMPort_ComboBox_Krosnis"
+                        Width="86"
+                        Margin="90,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        SelectionChanged="COMPort_ComboBox_SelectionChanged_Krosnis" />
+                    <Button
+                        Name="atsijungimoMygtukas_krosnis"
+                        IsEnabled="False"
+                        Width="86"
+                        Height="22"
+                        Margin="90,37,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Click="Disconnect_Krosnis_Click"
+                        Content="Disconnect" />
+                    <Image Source="{Binding mKrosnisStatus}" HorizontalAlignment="Left" Height="23" Margin="10,37,0,0" VerticalAlignment="Top" Width="23" />
+                    <TextBox IsEnabled="{Binding mKrosnisNePaleista}" Text="{Binding mKrosniesPradinisTaskas, Mode=TwoWay}" KeyDown="LoseFocusOnEnter" PreviewTextInput="NumberValidationTextBox2" HorizontalAlignment="Left" Height="23" Margin="10,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" />
+                    <TextBox IsEnabled="{Binding mKrosnisNePaleista}" Text="{Binding mKrosniesStatumas, Mode=TwoWay}" KeyDown="LoseFocusOnEnter" PreviewTextInput="NumberValidationTextBox2" HorizontalAlignment="Left" Height="23" Margin="104,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" />
+                    <Label Content="Start point" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Width="65" />
+                    <Label Content="Slope (0-99)" HorizontalAlignment="Left" Margin="104,64,0,0" VerticalAlignment="Top" />
+
+                    <Grid Margin="198,65,0,0" Background="#FFBBBBBB">
+                        <lvc:CartesianChart
+                            Margin="10,10,10,0"
+                            DisableAnimations="True"
+                            DataTooltip="{x:Null}"
+                            Hoverable="True">
+
+                            <lvc:CartesianChart.Series>
+                                <lvc:LineSeries
+                                    Fill="#FF2D7C00"
+                                    LineSmoothness="1"
+                                    Stroke="#FF004B07"
+                                    StrokeThickness="6"
+                                    Values="{Binding EinamasTaskasValue}" PointGeometrySize="17" />
+                                <lvc:LineSeries
+                                    Fill="Transparent"
+                                    LineSmoothness="1"
+                                    Stroke="#F34336"
+                                    StrokeThickness="3"
+                                    Values="{Binding ChartValues}" />
+                            </lvc:CartesianChart.Series>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis
+                                    Foreground="Black"
+                                    Title="Time"
+                                    LabelFormatter="{Binding DateTimeFormatter}"
+                                    MaxValue="{Binding AxisMax}"
+                                    MinValue="{Binding AxisMin}"
+                                    Unit="{Binding AxisUnit}" LabelsRotation="-45">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="{Binding AxisStep}" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis
+                                    Foreground="Black"
+                                    Title="Temperature (°C)" />
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </Grid>
+                    <TextBox IsEnabled="{Binding mKrosnisNePaleista}" Name="TempKeitimoIntervalas" KeyDown="LoseFocusOnEnter" HorizontalAlignment="Left" Height="23" Margin="10,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" PreviewTextInput="NumberValidationTextBox2" Text="1" />
+                    <Label Content="Temp. change interval (min.)" HorizontalAlignment="Left" Margin="10,231,0,0" VerticalAlignment="Top" />
+                    <Label Content="Temperature (-40 to 99)" HorizontalAlignment="Left" Margin="198,6,0,0" VerticalAlignment="Top" />
+                    <TextBox IsEnabled="{Binding mKrosnisNePaleista}" Name ="NextTempValue" KeyDown="LoseFocusOnEnter" PreviewTextInput="NumberValidationTextBox2" HorizontalAlignment="Left" Height="23" Margin="198,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99" Text="24" />
+                    <Button IsEnabled="{Binding mKrosnisNePaleista}" Content="Add" HorizontalAlignment="Left" Margin="302,37,0,0" VerticalAlignment="Top" Width="41" Height="23" Click="AddNextValueKrosnis" />
+                    <Label Content="Preset functions" HorizontalAlignment="Left" Margin="415,6,0,0" VerticalAlignment="Top" />
+                    <ComboBox Name="funkcijosForma" IsEnabled="{Binding mKrosnisNePaleista}" HorizontalAlignment="Left" Margin="415,37,0,0" VerticalAlignment="Top" Width="91" SelectedIndex="0" Height="23">
+                        <ComboBoxItem>Sine</ComboBoxItem>
+                        <ComboBoxItem>Cosine</ComboBoxItem>
+                        <ComboBoxItem>Line</ComboBoxItem>
+                    </ComboBox>
+                    <TextBox Name="TaskuSkaiciusFunkcijoj" IsEnabled="{Binding mKrosnisNePaleista}" PreviewTextInput="NumberValidationTextBox" KeyDown="LoseFocusOnEnter" HorizontalAlignment="Left" Height="22" Margin="511,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="57" Text="20" />
+                    <Label Content="Points" HorizontalAlignment="Left" Margin="511,6,0,0" VerticalAlignment="Top" Width="57" />
+                    <Button IsEnabled="{Binding mKrosnisNePaleista}" Content="Generate" HorizontalAlignment="Left" Margin="573,37,0,0" VerticalAlignment="Top" Width="57" Height="22" Click="GenerateFunction" />
+                    <Button Content="START" HorizontalAlignment="Left" Margin="10,0,0,10" Width="166" Height="43" VerticalAlignment="Bottom" Click="StartKrosnis" />
+                    <Button IsEnabled="{Binding mKrosnisNePaleista}" Content="Reset function" HorizontalAlignment="Left" Margin="10,290,0,0" VerticalAlignment="Top" Width="166" Click="resetGraph" />
+                    <Grid HorizontalAlignment="Left" Height="26" Margin="635,10,0,0" VerticalAlignment="Top" Width="86">
+                        <Label Content="{Binding ChartValues.Count}" HorizontalAlignment="Right" Width="28" HorizontalContentAlignment="Left" />
+                        <Label Content="{Binding mTemperaturosSkaitliukas}" HorizontalAlignment="Left" Width="28" HorizontalContentAlignment="Right" />
+                        <Label Content="+1/" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Top" Width="30" />
+                    </Grid>
+
+                    <RadioButton IsEnabled="{Binding mKrosnisNePaleista}" GroupName="TempKeitimoVeiksmai" Content="Wait for correct SENSOR&#xD;&#xA;temperature before changing" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top" IsChecked="True" />
+                    <RadioButton IsEnabled="{Binding mKrosnisNePaleista}" IsChecked="{Binding KrosnisTempWait}" GroupName="TempKeitimoVeiksmai" Content="Wait for correct CHAMBER&#xD;&#xA;temperature before changing" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top" Height="32" Width="183" />
+                    <Label Name ="krosnisTimeStamp" Content="" Margin="635,37,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Right" />
+                    <TextBox  Text="{Binding mTempRibos, Mode=TwoWay}" IsEnabled="{Binding mKrosnisNePaleista}" FontSize="10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="17" Margin="22,211,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="20" KeyDown="LoseFocusOnEnter" PreviewTextInput="NumberValidationTextBox2" />
+                    <Label Content="+-" HorizontalAlignment="Left" Margin="0,205,0,0" VerticalAlignment="Top" Height="26" Width="22" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Label Content="ms" HorizontalAlignment="Left" Margin="390,116,0,0" VerticalAlignment="Top" Height="25" />
+        <Button HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Width="88" Height="88" Content="Connect" Click="sensorConnect_Click" />
+        <Label Content="Sensor found" HorizontalAlignment="Left" Margin="116,85,0,0" VerticalAlignment="Top" />
+        <Label Content="Configuration server" HorizontalAlignment="Left" Margin="116,116,0,0" VerticalAlignment="Top" />
+        <Label Content="Measurement server" HorizontalAlignment="Left" Margin="116,147,0,0" VerticalAlignment="Top" />
+        <Image Source="{Binding mConfServerStatus, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Width="26" Margin="253,116,0,0" VerticalAlignment="Top" />
+        <Image Source="{Binding mMeasServerStatus, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Width="26" Margin="253,147,0,0" VerticalAlignment="Top" />
+        <Image Source="{Binding mSensorStatus, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Width="26" Margin="253,85,0,0" VerticalAlignment="Top" />
+        <Label Content="Points per file" HorizontalAlignment="Left" Margin="578,85,0,0" VerticalAlignment="Top" />
+        <TextBox Name = "TaskuSkaiciusFaile" HorizontalAlignment="Left" Height="23" Margin="578,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82" KeyDown="LoseFocusOnEnter" PreviewTextInput="NumberValidationTextBox" Text="50000" />
+        <Label Content="/" HorizontalAlignment="Left" Margin="557,113,0,0" VerticalAlignment="Top" Width="16" />
+        <Label Content="{Binding mEiluciuSkaitliukas}" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="482,113,0,0" VerticalAlignment="Top" Width="70" Height="26" />
+    </Grid>
+</Window>

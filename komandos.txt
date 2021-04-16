@@ -1,0 +1,9 @@
+﻿//kontroleriui
+0 - stabdyti siuntima
+1 - pradeti siuntima
+2 - pakeisti taimerio perioda (siusti milisekundem 16 baitu skaicium, lsb first)
+
+//lazeriui
+
+
+
